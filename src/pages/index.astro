@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+const allPrompts = await getCollection('prompts');
+---
+
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Prompt Rehberleri & Şablonları</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; background: #f9f9f9; }
+      h1 { color: #111; border-bottom: 2px solid #eaeaea; padding-bottom: 10px; }
+      .card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+      .card h2 { margin-top: 0; font-size: 1.4rem; }
+      .card a { color: #0066cc; text-decoration: none; }
+      .card a:hover { text-decoration: underline; }
+      p { color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>AI Prompt ve Şablon Kütüphanesi</h1>
+    <p>Yapay zeka araçları için optimize edilmiş en güncel rehberler ve promptlar.</p>
+    
+    <hr style="border:0; border-top:1px solid #eaeaea; margin: 20px 0;" />
+
+    {allPrompts.map((post) => (
+      <div class="card">
+        <h2><a href={`/prompts/${post.slug}`}>{post.data.title}</a></h2>
+        <p>{post.data.description}</p>
+        <small>Kategori: {post.data.category} | Tarih: {post.data.pubDate}</small>
+      </div>
+    ))}
+  </body>
+</html>
